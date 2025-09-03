@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("E8R.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+377441f632d4ff20fc1ae1e977b55ea7ad44e019")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f4d8165c90d09cee5a69ae40b3a921688a251772")]
 [assembly: System.Reflection.AssemblyProductAttribute("E8R.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("E8R.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
