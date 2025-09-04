@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "AtUwCp4f+sc=",
+  "dgSpecHash": "4dSCtrdIcoU=",
   "success": true,
   "projectFilePath": "C:\\Users\\TALLER\\Documents\\GitHub\\Web-Services\\E8R_MANAGER\\E8R.API\\E8R.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TALLER\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
-    "C:\\Users\\TALLER\\.nuget\\packages\\bouncycastle.cryptography\\2.5.1\\bouncycastle.cryptography.2.5.1.nupkg.sha512",
+    "C:\\Users\\TALLER\\.nuget\\packages\\bouncycastle.cryptography\\2.6.2\\bouncycastle.cryptography.2.6.2.nupkg.sha512",
     "C:\\Users\\TALLER\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\TALLER\\.nuget\\packages\\coverlet.collector\\6.0.4\\coverlet.collector.6.0.4.nupkg.sha512",
     "C:\\Users\\TALLER\\.nuget\\packages\\entityframeworkcore.createdupdateddate\\8.0.0\\entityframeworkcore.createdupdateddate.8.0.0.nupkg.sha512",

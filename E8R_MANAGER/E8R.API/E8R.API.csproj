@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+        <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.2" />
         <PackageReference Include="coverlet.collector" Version="6.0.4">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -50,19 +51,6 @@
       <Folder Include="Client\Infrastructure.Persistence.EFC.Repositories\" />
       <Folder Include="Client\Interfaces.REST\Resources\" />
       <Folder Include="Client\Interfaces.REST\Transform\" />
-      <Folder Include="IAM\Application.Internal\CommandServices\" />
-      <Folder Include="IAM\Application.Internal\OutboundServices\" />
-      <Folder Include="IAM\Application.Internal\QueryServices\" />
-      <Folder Include="IAM\Domain\Model\Aggregates\" />
-      <Folder Include="IAM\Domain\Model\Commands\" />
-      <Folder Include="IAM\Domain\Model\Entities\" />
-      <Folder Include="IAM\Domain\Model\Queries\" />
-      <Folder Include="IAM\Domain\Model\ValueObjects\" />
-      <Folder Include="IAM\Domain\Repositories\" />
-      <Folder Include="IAM\Domain\Services\" />
-      <Folder Include="IAM\Infrastructure.Persistence.EFC.Repositories\" />
-      <Folder Include="IAM\Interfaces.REST\Resources\" />
-      <Folder Include="IAM\Interfaces.REST\Transform\" />
       <Folder Include="Inventory\Application.Internal\CommandServices\" />
       <Folder Include="Inventory\Application.Internal\QueryServices\" />
       <Folder Include="Inventory\Domain\Model\Aggregates\" />
