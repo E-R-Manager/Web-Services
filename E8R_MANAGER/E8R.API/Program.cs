@@ -2,10 +2,24 @@ using E8R.API;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.OpenApi.Models;
+
 using E8R.API.Shared.Domain.Repositories;
 using E8R.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 using E8R.API.Shared.Infrastructure.Persistence.EFC.Repositories;
 using E8R.API.Shared.Interfaces.ASP.Configuration;
+
+using E8R.API.IAM.Application.Internal.CommandServices;
+using E8R.API.IAM.Application.Internal.OutboundServices;
+using E8R.API.IAM.Application.Internal.QueryServices;
+using E8R.API.IAM.Domain.Repositories;
+using E8R.API.IAM.Domain.Services;
+using E8R.API.IAM.Infrastructure.Hashing.BCrypt.Services;
+using E8R.API.IAM.Infrastructure.Persistence.EFC.Repositories;
+using E8R.API.IAM.Infrastructure.Pipeline.Middleware.Extensions;
+using E8R.API.IAM.Infrastructure.Tokens.JWT.Configuration;
+using E8R.API.IAM.Infrastructure.Tokens.JWT.Services;
+using E8R.API.IAM.Interfaces.ACL;
+using E8R.API.IAM.Interfaces.ACL.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -116,6 +130,15 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Queries
 
 // TokenSettings Configuration
+builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserCommandService, UserCommandService>();
+builder.Services.AddScoped<IUserQueryService, UserQueryService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IHashingService, HashingService>();
+builder.Services.AddScoped<IIamContextFacade, IamContextFacade>();
+
 
 var app = builder.Build();
 
@@ -136,8 +159,7 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 
 app.UseCors("AllowAll");
 // Add Authorization Middleware to Pipeline
-// CREAR IAM PRIMERO
-//app.UseRequestAuthorization();
+app.UseRequestAuthorization();
 
 app.UseHttpsRedirection();
 
