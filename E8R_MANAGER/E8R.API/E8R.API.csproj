@@ -99,17 +99,5 @@
       <Folder Include="Service\Infrastructure.Persistence.EFC.Repositories\" />
       <Folder Include="Service\Interfaces.REST\Resources\" />
       <Folder Include="Service\Interfaces.REST\Transform\" />
-      <Folder Include="User\Application.Internal\CommandServices\" />
-      <Folder Include="User\Application.Internal\QueryServices\" />
-      <Folder Include="User\Domain\Model\Aggregates\" />
-      <Folder Include="User\Domain\Model\Commands\" />
-      <Folder Include="User\Domain\Model\Entities\" />
-      <Folder Include="User\Domain\Model\Queries\" />
-      <Folder Include="User\Domain\Model\ValueObjects\" />
-      <Folder Include="User\Domain\Repositories\" />
-      <Folder Include="User\Domain\Services\" />
-      <Folder Include="User\Infrastructure.Persistence.EFC.Repositories\" />
-      <Folder Include="User\Interfaces.REST\Resources\" />
-      <Folder Include="User\Interfaces.REST\Transform\" />
     </ItemGroup>
 </Project>
