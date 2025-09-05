@@ -16,6 +16,7 @@ public class PhoneNumber
         Client = client;
     }
     
+    public int Id { get; set; }
     public string Number { get; internal set; }
     public Aggregates.Client Client { get; internal set; }
 }
