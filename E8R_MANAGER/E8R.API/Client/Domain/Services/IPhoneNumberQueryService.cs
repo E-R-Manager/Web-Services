@@ -1,6 +1,11 @@
+using E8R.API.Client.Domain.Model.Aggregates;
+using E8R.API.Client.Domain.Model.Entities;
+using E8R.API.Client.Domain.Model.Queries;
+
 namespace E8R.API.Client.Domain.Services;
 
-public class IPhoneNumberQueryService
+public interface IPhoneNumberQueryService
 {
-    
+    Task<IEnumerable<PhoneNumber>> Handle(GetAllPhoneNumbersQuery query);
+    Task<PhoneNumber?> Handle(GetPhoneNumberByIdQuery query);
 }
