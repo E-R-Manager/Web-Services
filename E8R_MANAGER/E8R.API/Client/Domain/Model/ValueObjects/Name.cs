@@ -1,8 +1,8 @@
 namespace E8R.API.Client.Domain.Model.ValueObjects;
 
-public record Ruc(string ClientRuc)
+public record Name(string ClientName)
 {
-    public Ruc() : this(string.Empty)
+    public Name() : this(string.Empty)
     {
         
     }

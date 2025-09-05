@@ -1,5 +1,5 @@
 using E8R.API.Client.Domain.Model.ValueObjects;
-using E8R.API.Client.Domain.Model.
+using E8R.API.Client.Domain.Model.Commands;
 
 namespace E8R.API.Client.Domain.Model.Aggregates;
 
@@ -7,23 +7,39 @@ public class Client
 {
     public Client()
     {
-        Names = new Names();
-        Lastnames = new Lastnames();
+        Name = new Name();
         Dni = new Dni();
         Ruc = new Ruc();
         Email = new Email();
         Address = new Address();
+        ClientType = ClientType.Persona;
     }
     
-    public Client(string names, string lastnames, string dni, string ruc, string email, string adress)
+    public Client(string name, string dni, string ruc, string email, string address, ClientType clientType)
     {
-        Names = new Names(names);
-        Lastnames = new Lastnames(lastnames);
+        Name = new Name(name);
         Dni = new Dni(dni);
         Ruc = new Ruc(ruc);
         Email = new Email(email);
-        Address = new Address(adress);
+        Address = new Address(address);
+        ClientType = clientType;
     }
     
     public Client(CreateClientCommand command)
+    {
+        Name = new Name(command.Name);
+        Dni = new Dni(command.Dni);
+        Ruc = new Ruc(command.Ruc);
+        Email = new Email(command.Email);
+        Address = new Address(command.Address);
+        ClientType = ClientType.Persona;
+    }
+    
+    public int Id { get; set; }
+    public Name Name { get; internal set; }
+    public Dni Dni { get; internal set; }
+    public Ruc Ruc { get; internal set; }
+    public Email Email { get; internal set; }
+    public Address Address { get; internal set; }
+    public ClientType ClientType { get; internal set; }
 }
