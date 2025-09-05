@@ -39,18 +39,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Client\Application.Internal\CommandServices\" />
-      <Folder Include="Client\Application.Internal\QueryServices\" />
-      <Folder Include="Client\Domain\Model\Aggregates\" />
-      <Folder Include="Client\Domain\Model\Commands\" />
-      <Folder Include="Client\Domain\Model\Entities\" />
-      <Folder Include="Client\Domain\Model\Queries\" />
-      <Folder Include="Client\Domain\Model\ValueObjects\" />
-      <Folder Include="Client\Domain\Repositories\" />
-      <Folder Include="Client\Domain\Services\" />
-      <Folder Include="Client\Infrastructure.Persistence.EFC.Repositories\" />
-      <Folder Include="Client\Interfaces.REST\Resources\" />
-      <Folder Include="Client\Interfaces.REST\Transform\" />
       <Folder Include="Inventory\Application.Internal\CommandServices\" />
       <Folder Include="Inventory\Application.Internal\QueryServices\" />
       <Folder Include="Inventory\Domain\Model\Aggregates\" />

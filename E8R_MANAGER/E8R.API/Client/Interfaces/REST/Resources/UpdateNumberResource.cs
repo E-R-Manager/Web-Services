@@ -1,0 +1,6 @@
+namespace E8R.API.Client.Interfaces.REST.Resources;
+
+public class UpdateNumberResource
+{
+    
+}
