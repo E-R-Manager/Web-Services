@@ -8,5 +8,5 @@ public interface IClientQueryService
 {
     Task<IEnumerable<Model.Aggregates.Client>> Handle(GetAllClientsQuery query);
     Task<Model.Aggregates.Client?> Handle(GetClientByIdQuery query);
-    Task<PhoneNumber?> Handle(GetPhoneNumbersByClientIdQuery query);
+    Task<IEnumerable<PhoneNumber>> Handle(GetPhoneNumbersByClientIdQuery query);
 }
