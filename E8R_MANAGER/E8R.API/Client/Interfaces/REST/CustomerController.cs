@@ -72,7 +72,7 @@ public class CustomerController(ICustomerCommandService customerCommandService, 
             var result = await customerCommandService.Handle(command);
             if (!result) return BadRequest(new { message = "No se pudo eliminar el cliente." });
 
-            return NoContent();
+            return Ok(new { message = $"El cliente con id {customerId} se ha borrado correctamente." });
         }
         catch (Exception e)
         {

@@ -7,4 +7,5 @@ public interface IPhoneNumberQueryService
 {
     Task<IEnumerable<PhoneNumber>> Handle(GetAllPhoneNumbersQuery query);
     Task<PhoneNumber?> Handle(GetPhoneNumberByIdQuery query);
+    Task<IEnumerable<PhoneNumber>> Handle(GetPhoneNumbersByCustomerIdQuery query);
 }

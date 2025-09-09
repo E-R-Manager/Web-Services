@@ -16,4 +16,9 @@ public class PhoneNumberQueryService(IPhoneNumberRepository phoneNumberRepositor
     {
         return await phoneNumberRepository.ListAsync();
     }
+    
+    public async Task<IEnumerable<PhoneNumber>> Handle(GetPhoneNumbersByCustomerIdQuery query)
+    {
+        return await phoneNumberRepository.FindByCustomerIdAsync(query.CustomerId);
+    }
 }

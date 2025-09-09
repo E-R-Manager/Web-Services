@@ -43,6 +43,7 @@ public class CustomerCommandService(ICustomerRepository customerRepository, IUni
         {
             return false;
         }
+        await customerRepository.RemoveAsync(customer);
         await unitOfWork.CompleteAsync();
         return true;
     }
