@@ -17,11 +17,12 @@ public class PhoneNumber
         Customer = customer;
         CustomerId = customerId;
     }
-
+    
     public PhoneNumber(CreatePhoneNumberCommand command, Customer customer)
     {
-        Number = new string(command.Number);
+        Number = command.Number;
         Customer = customer;
+        CustomerId = customer.Id;
     }
     
     public int Id { get; set; }

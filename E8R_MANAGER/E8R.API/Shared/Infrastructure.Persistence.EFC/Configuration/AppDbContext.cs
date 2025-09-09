@@ -43,11 +43,10 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         
         // PhoneNumber - Customer Relationship
         builder.Entity<PhoneNumber>()
-            .HasOne<Customer>()
+            .HasOne(p => p.Customer)
             .WithMany()
             .HasForeignKey(p => p.CustomerId)
-            .IsRequired();
-
+            .OnDelete(DeleteBehavior.Cascade);
   
         // IAM Bounded Context
         builder.Entity<User>().HasKey(u => u.Id);

@@ -17,7 +17,7 @@ public class PhoneNumberRepository : BaseRepository<PhoneNumber>, IPhoneNumberRe
     
     public async Task<IEnumerable<PhoneNumber>> FindByCustomerIdAsync(int customerId)
     {
-        return await _context.PhoneNumbers.Where(a => a.Id == customerId).ToListAsync();
+        return await _context.PhoneNumbers.Where(a => a.CustomerId == customerId).ToListAsync();
     }
     
     public async Task RemoveAsync(PhoneNumber phoneNumber)

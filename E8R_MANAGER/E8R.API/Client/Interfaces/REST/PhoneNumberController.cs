@@ -46,6 +46,13 @@ public class PhoneNumberController(IPhoneNumberCommandService phoneNumberCommand
     [HttpPost]
     public async Task<IActionResult> CreatePhoneNumber([FromBody] CreatePhoneNumberResource createPhoneNumberResource)
     {
+        if (createPhoneNumberResource.CustomerId <= 0)
+            return BadRequest(new { message = "El CustomerId debe ser mayor a 0." });
+
+        var customer = await customerQueryService.Handle(new GetCustomerByIdQuery(createPhoneNumberResource.CustomerId));
+        if (customer == null)
+            return BadRequest(new { message = "Customer Id no encontrado." });
+
         try
         {
             var command = CreatePhoneNumberCommandFromResourceAssembler.ToCommandFromResource(createPhoneNumberResource);
@@ -56,7 +63,7 @@ public class PhoneNumberController(IPhoneNumberCommandService phoneNumberCommand
         }
         catch (Exception e)
         {
-            return BadRequest(new { message = "Ocurrió un error al crear el numero. " + e.Message });
+            return BadRequest(new { message = $"Error: {e.GetType().Name} - {e.Message}" });
         }
     }
     
