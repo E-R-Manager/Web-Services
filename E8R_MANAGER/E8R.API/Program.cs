@@ -8,6 +8,13 @@ using E8R.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 using E8R.API.Shared.Infrastructure.Persistence.EFC.Repositories;
 using E8R.API.Shared.Interfaces.ASP.Configuration;
 
+using E8R.API.Client.Application.Internal.CommandServices;
+using E8R.API.Client.Application.Internal.QueryServices;
+using E8R.API.Client.Domain.Repositories;
+using E8R.API.Client.Domain.Services;
+using E8R.API.Client.Infrastructure;
+using E8R.API.Client.Infrastructure.Persistence.EFC.Repositories;
+
 using E8R.API.IAM.Application.Internal.CommandServices;
 using E8R.API.IAM.Application.Internal.OutboundServices;
 using E8R.API.IAM.Application.Internal.QueryServices;
@@ -115,12 +122,19 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 // Shared Bounded Context Injection Configuration
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-// Registration Bounded Context Injection Configuration
-// Repositories
+// Client Bounded Context Injection Configuration
+// Repository
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IPhoneNumberRepository, PhoneNumberRepository>();
 
-// Commands
+// Command
+builder.Services.AddScoped<ICustomerCommandService, CustomerCommandService>();
+builder.Services.AddScoped<IPhoneNumberCommandService, PhoneNumberCommandService>();
 
-// Queries
+// Query
+builder.Services.AddScoped<ICustomerQueryService, CustomerQueryService>();
+builder.Services.AddScoped<IPhoneNumberQueryService, PhoneNumberQueryService>();
+
 
 // User Bounded Context Injection Configuration
 // Repositories
