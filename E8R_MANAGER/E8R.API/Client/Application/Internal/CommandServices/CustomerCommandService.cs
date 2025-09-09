@@ -3,7 +3,6 @@ using E8R.API.Client.Domain.Repositories;
 using E8R.API.Client.Domain.Services;
 using E8R.API.Shared.Domain.Repositories;
 using E8R.API.Client.Domain.Model.Aggregates;
-using E8R.API.Client.Domain.Model.ValueObjects;
 
 namespace E8R.API.Client.Application.Internal.CommandServices;
 
@@ -26,11 +25,11 @@ public class CustomerCommandService(ICustomerRepository customerRepository, IUni
             return null;
         }
         
-        customer.Name = new Name(command.Name);
-        customer.Dni = new Dni(command.Dni);
-        customer.Ruc = new Ruc(command.Ruc);
-        customer.Email = new Email(command.Email);
-        customer.Address = new Address(command.Address);
+        customer.Name = command.Name;
+        customer.Dni = command.Dni;
+        customer.Ruc = command.Ruc;
+        customer.Email = command.Email;
+        customer.Address = command.Address;
         customer.CustomerType = command.CustomerType;
         
         await unitOfWork.CompleteAsync();
