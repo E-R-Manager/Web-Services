@@ -5,5 +5,6 @@ namespace E8R.API.Client.Domain.Repositories;
 
 public interface IPhoneNumberRepository : IBaseRepository<PhoneNumber>
 {
-    Task<IEnumerable<PhoneNumber>> FindByClientIdAsync(int clientId);
+    Task<IEnumerable<PhoneNumber>> FindByCustomerIdAsync(int customerId);
+    Task RemoveAsync(PhoneNumber phoneNumber);
 }

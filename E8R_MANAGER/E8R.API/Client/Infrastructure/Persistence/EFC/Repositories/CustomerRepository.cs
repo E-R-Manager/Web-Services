@@ -6,11 +6,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace E8R.API.Client.Infrastructure.Persistence.EFC.Repositories;
 
-public class ClientRepository : BaseRepository<Domain.Model.Aggregates.Client>, IClientRepository
+public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
 {
     private readonly AppDbContext _context;
-    public ClientRepository(AppDbContext context) : base(context)
+    public CustomerRepository(AppDbContext context) : base(context)
     {
         _context = context;
+    }
+    
+    public async Task RemoveAsync(Customer customer)
+    {
+        _context.Customers.Remove(customer);
+        await _context.SaveChangesAsync();
     }
 }

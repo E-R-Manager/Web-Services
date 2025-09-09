@@ -7,4 +7,5 @@ public interface IPhoneNumberCommandService
 {
     Task<PhoneNumber?> Handle(CreatePhoneNumberCommand command);
     Task<PhoneNumber?> Handle(UpdatePhoneNumberCommand command);
+    Task<bool> Handle(DeletePhoneNumberCommand command);
 }

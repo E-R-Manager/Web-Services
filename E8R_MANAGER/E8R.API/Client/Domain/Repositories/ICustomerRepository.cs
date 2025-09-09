@@ -3,7 +3,7 @@ using E8R.API.Client.Domain.Model.Aggregates;
 
 namespace E8R.API.Client.Domain.Repositories;
 
-public interface IClientRepository: IBaseRepository<Model.Aggregates.Client>
+public interface ICustomerRepository: IBaseRepository<Customer>
 {
-
+    Task RemoveAsync(Customer customer);
 }

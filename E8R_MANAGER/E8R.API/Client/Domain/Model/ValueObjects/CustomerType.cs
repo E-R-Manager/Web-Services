@@ -1,6 +1,6 @@
 namespace E8R.API.Client.Domain.Model.ValueObjects;
 
-public enum ClientType
+public enum CustomerType
 {
     Persona,
     Empresa

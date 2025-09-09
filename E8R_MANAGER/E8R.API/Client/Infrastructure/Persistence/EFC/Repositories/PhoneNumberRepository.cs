@@ -15,8 +15,15 @@ public class PhoneNumberRepository : BaseRepository<PhoneNumber>, IPhoneNumberRe
         _context = context;
     }
     
-    public async Task<IEnumerable<PhoneNumber>> FindByClientIdAsync(int clientId)
+    public async Task<IEnumerable<PhoneNumber>> FindByCustomerIdAsync(int customerId)
     {
-        return await _context.PhoneNumbers.Where(a => a.Id == clientId).ToListAsync();
+        return await _context.PhoneNumbers.Where(a => a.Id == customerId).ToListAsync();
     }
+    
+    public async Task RemoveAsync(PhoneNumber phoneNumber)
+    {
+        _context.PhoneNumbers.Remove(phoneNumber);
+        await _context.SaveChangesAsync();
+    }
+    
 }

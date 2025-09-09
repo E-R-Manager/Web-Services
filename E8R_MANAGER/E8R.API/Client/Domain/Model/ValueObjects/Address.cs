@@ -1,6 +1,6 @@
 namespace E8R.API.Client.Domain.Model.ValueObjects;
 
-public class Address(string ClientAddress)
+public record Address(string CustomerAddress)
 {
     public Address() : this(string.Empty)
     {

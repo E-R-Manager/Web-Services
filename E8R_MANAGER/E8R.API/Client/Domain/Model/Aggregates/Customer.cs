@@ -3,36 +3,36 @@ using E8R.API.Client.Domain.Model.Commands;
 
 namespace E8R.API.Client.Domain.Model.Aggregates;
 
-public class Client
+public class Customer
 {
-    public Client()
+    public Customer()
     {
         Name = new Name();
         Dni = new Dni();
         Ruc = new Ruc();
         Email = new Email();
         Address = new Address();
-        ClientType = ClientType.Persona;
+        CustomerType = CustomerType.Persona;
     }
     
-    public Client(string name, string dni, string ruc, string email, string address, ClientType clientType)
+    public Customer(string name, string dni, string ruc, string email, string address, CustomerType customerType)
     {
         Name = new Name(name);
         Dni = new Dni(dni);
         Ruc = new Ruc(ruc);
         Email = new Email(email);
         Address = new Address(address);
-        ClientType = clientType;
+        CustomerType = customerType;
     }
     
-    public Client(CreateClientCommand command)
+    public Customer(CreateCustomerCommand command)
     {
         Name = new Name(command.Name);
         Dni = new Dni(command.Dni);
         Ruc = new Ruc(command.Ruc);
         Email = new Email(command.Email);
         Address = new Address(command.Address);
-        ClientType = ClientType.Persona;
+        CustomerType = CustomerType.Persona;
     }
     
     public int Id { get; set; }
@@ -41,5 +41,5 @@ public class Client
     public Ruc Ruc { get; internal set; }
     public Email Email { get; internal set; }
     public Address Address { get; internal set; }
-    public ClientType ClientType { get; internal set; }
+    public CustomerType CustomerType { get; internal set; }
 }

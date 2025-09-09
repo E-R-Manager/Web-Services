@@ -1,4 +1,3 @@
-using E8R.API.Client.Domain.Model.Aggregates;
 using E8R.API.Client.Domain.Model.Entities;
 using E8R.API.Client.Domain.Model.Queries;
 
