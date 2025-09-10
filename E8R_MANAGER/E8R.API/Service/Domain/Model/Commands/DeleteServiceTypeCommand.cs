@@ -1,3 +1,3 @@
 namespace E8R.API.Service.Domain.Model.Commands;
 
-public record DeleteServiceTypeCommand();
+public record DeleteServiceTypeCommand(int ServiceTypeId);

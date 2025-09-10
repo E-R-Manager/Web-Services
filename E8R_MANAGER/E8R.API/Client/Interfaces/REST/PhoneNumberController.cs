@@ -8,7 +8,8 @@ namespace E8R.API.Client.Interfaces.REST;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-public class PhoneNumberController(IPhoneNumberCommandService phoneNumberCommandService, 
+public class PhoneNumberController(
+    IPhoneNumberCommandService phoneNumberCommandService, 
     IPhoneNumberQueryService phoneNumberQueryService, 
     ICustomerQueryService customerQueryService)
     :ControllerBase
@@ -46,13 +47,6 @@ public class PhoneNumberController(IPhoneNumberCommandService phoneNumberCommand
     [HttpPost]
     public async Task<IActionResult> CreatePhoneNumber([FromBody] CreatePhoneNumberResource createPhoneNumberResource)
     {
-        if (createPhoneNumberResource.CustomerId <= 0)
-            return BadRequest(new { message = "El CustomerId debe ser mayor a 0." });
-
-        var customer = await customerQueryService.Handle(new GetCustomerByIdQuery(createPhoneNumberResource.CustomerId));
-        if (customer == null)
-            return BadRequest(new { message = "Customer Id no encontrado." });
-
         try
         {
             var command = CreatePhoneNumberCommandFromResourceAssembler.ToCommandFromResource(createPhoneNumberResource);

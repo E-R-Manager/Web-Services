@@ -1,7 +1,7 @@
 namespace E8R.API.Service.Domain.Model.Commands;
 
 public record UpdateServiceCategoryCommand(
-    int Id,
+    int ServiceCategoryId,
     string Name,
     int ContractedAmount
 );
