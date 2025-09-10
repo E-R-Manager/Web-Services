@@ -39,8 +39,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Inventory\Application.Internal\CommandServices\" />
-      <Folder Include="Inventory\Application.Internal\QueryServices\" />
+      <Folder Include="Inventory\Application\Internal\CommandServices\" />
+      <Folder Include="Inventory\Application\Internal\QueryServices\" />
       <Folder Include="Inventory\Domain\Model\Aggregates\" />
       <Folder Include="Inventory\Domain\Model\Commands\" />
       <Folder Include="Inventory\Domain\Model\Entities\" />
@@ -48,11 +48,11 @@
       <Folder Include="Inventory\Domain\Model\ValueObjects\" />
       <Folder Include="Inventory\Domain\Repositories\" />
       <Folder Include="Inventory\Domain\Services\" />
-      <Folder Include="Inventory\Infrastructure.Persistence.EFC.Repositories\" />
-      <Folder Include="Inventory\Interfaces.REST\Resources\" />
-      <Folder Include="Inventory\Interfaces.REST\Transform\" />
-      <Folder Include="ODS\Application.Internal\CommandServices\" />
-      <Folder Include="ODS\Application.Internal\QueryServices\" />
+      <Folder Include="Inventory\Infrastructure\Persistence\EFC\Repositories\" />
+      <Folder Include="Inventory\Interfaces\REST\Resources\" />
+      <Folder Include="Inventory\Interfaces\REST\Transform\" />
+      <Folder Include="ODS\Application\Internal\CommandServices\" />
+      <Folder Include="ODS\Application\Internal\QueryServices\" />
       <Folder Include="ODS\Domain\Model\Aggregates\" />
       <Folder Include="ODS\Domain\Model\Commands\" />
       <Folder Include="ODS\Domain\Model\Entities\" />
@@ -60,20 +60,10 @@
       <Folder Include="ODS\Domain\Model\ValueObjects\" />
       <Folder Include="ODS\Domain\Repositories\" />
       <Folder Include="ODS\Domain\Services\" />
-      <Folder Include="ODS\Infrastructure.Persistence.EFC.Repositories\" />
-      <Folder Include="ODS\Interfaces.REST\Resources\" />
-      <Folder Include="ODS\Interfaces.REST\Transform\" />
-      <Folder Include="Service\Application.Internal\CommandServices\" />
-      <Folder Include="Service\Application.Internal\QueryServices\" />
-      <Folder Include="Service\Domain\Model\Aggregates\" />
-      <Folder Include="Service\Domain\Model\Commands\" />
-      <Folder Include="Service\Domain\Model\Entities\" />
-      <Folder Include="Service\Domain\Model\Queries\" />
-      <Folder Include="Service\Domain\Model\ValueObjects\" />
-      <Folder Include="Service\Domain\Repositories\" />
-      <Folder Include="Service\Domain\Services\" />
-      <Folder Include="Service\Infrastructure.Persistence.EFC.Repositories\" />
-      <Folder Include="Service\Interfaces.REST\Resources\" />
-      <Folder Include="Service\Interfaces.REST\Transform\" />
+      <Folder Include="ODS\Infrastructure\Persistence\EFC\Repositories\" />
+      <Folder Include="ODS\Interfaces\REST\Resources\" />
+      <Folder Include="ODS\Interfaces\REST\Transform\" />
+      <Folder Include="Service\Interfaces\REST\Resources\" />
+      <Folder Include="Service\Interfaces\REST\Transform\" />
     </ItemGroup>
 </Project>

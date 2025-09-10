@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using E8R.API.Client.Domain.Model.Aggregates;
 using E8R.API.Client.Domain.Model.Entities;
 
+using E8R.API.Service.Domain.Model.Aggregates;
+using E8R.API.Service.Domain.Model.Entities;
+
 namespace E8R.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 
 public class AppDbContext(DbContextOptions options) : DbContext(options)
@@ -21,12 +24,14 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
     public DbSet<User> Users { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<PhoneNumber> PhoneNumbers { get; set; }
+    public DbSet<ServiceCategory> ServiceCategories { get; set; }
+    public DbSet<ServiceType> ServiceTypes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        // Customer Bounded Context
-        
+        // Client Bounded Context
+        // Customer Table
         builder.Entity<Customer>().HasKey(a => a.Id);
         builder.Entity<Customer>().Property(a => a.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Customer>().Property(a => a.Name).IsRequired().HasMaxLength(100);
@@ -47,7 +52,26 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             .WithMany()
             .HasForeignKey(p => p.CustomerId)
             .OnDelete(DeleteBehavior.Cascade);
-  
+        
+        // Service Bounded Context
+        // ServiceCategory Table
+        builder.Entity<ServiceCategory>().HasKey(sc => sc.Id);
+        builder.Entity<ServiceCategory>().Property(sc => sc.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<ServiceCategory>().Property(sc => sc.Name).IsRequired().HasMaxLength(100);
+        builder.Entity<ServiceCategory>().Property(sc => sc.ContractedAmount).IsRequired();
+        
+        // ServiceType Table
+        builder.Entity<ServiceType>().HasKey(st => st.Id);
+        builder.Entity<ServiceType>().Property(st => st.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<ServiceType>().Property(st => st.Name).IsRequired().HasMaxLength(100);
+        
+        // ServiceType - ServiceCategory Relationship
+        builder.Entity<ServiceType>()
+            .HasOne(st => st.ServiceCategory)
+            .WithMany()
+            .HasForeignKey(st => st.ServiceCategoryId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
         // IAM Bounded Context
         builder.Entity<User>().HasKey(u => u.Id);
         builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
