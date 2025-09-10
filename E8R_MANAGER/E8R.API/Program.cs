@@ -12,8 +12,13 @@ using E8R.API.Client.Application.Internal.CommandServices;
 using E8R.API.Client.Application.Internal.QueryServices;
 using E8R.API.Client.Domain.Repositories;
 using E8R.API.Client.Domain.Services;
-using E8R.API.Client.Infrastructure;
 using E8R.API.Client.Infrastructure.Persistence.EFC.Repositories;
+
+using E8R.API.Service.Application.Internal.CommandServices;
+using E8R.API.Service.Application.Internal.QueryServices;
+using E8R.API.Service.Domain.Repositories;
+using E8R.API.Service.Domain.Services;
+using E8R.API.Service.Infrastructure.Persistence.EFC.Repositories;
 
 using E8R.API.IAM.Application.Internal.CommandServices;
 using E8R.API.IAM.Application.Internal.OutboundServices;
@@ -135,13 +140,19 @@ builder.Services.AddScoped<IPhoneNumberCommandService, PhoneNumberCommandService
 builder.Services.AddScoped<ICustomerQueryService, CustomerQueryService>();
 builder.Services.AddScoped<IPhoneNumberQueryService, PhoneNumberQueryService>();
 
+// Service Bounded Context Injection Configuration
+// Repository
+builder.Services.AddScoped<IServiceCategoryRepository, ServiceCategoryRepository>();
+builder.Services.AddScoped<IServiceTypeRepository, ServiceTypeRepository>();
 
-// User Bounded Context Injection Configuration
-// Repositories
+// Command
+builder.Services.AddScoped<IServiceCategoryCommandService, ServiceCategoryCommandService>();
+builder.Services.AddScoped<IServiceTypeCommandService, ServiceTypeCommandService>();
 
-// Commands
+// Query
+builder.Services.AddScoped<IServiceCategoryQueryService, ServiceCategoryQueryService>();
+builder.Services.AddScoped<IServiceTypeQueryService, ServiceTypeQueryService>();
 
-// Queries
 
 // TokenSettings Configuration
 builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
