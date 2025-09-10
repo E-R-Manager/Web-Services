@@ -10,6 +10,9 @@ using E8R.API.Client.Domain.Model.Entities;
 using E8R.API.Service.Domain.Model.Aggregates;
 using E8R.API.Service.Domain.Model.Entities;
 
+using E8R.API.Inventory.Domain.Model.Aggregates;
+using E8R.API.Inventory.Domain.Model.Entities;
+
 namespace E8R.API.Shared.Infrastructure.Persistence.EFC.Configuration;
 
 public class AppDbContext(DbContextOptions options) : DbContext(options)
@@ -26,6 +29,9 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
     public DbSet<PhoneNumber> PhoneNumbers { get; set; }
     public DbSet<ServiceCategory> ServiceCategories { get; set; }
     public DbSet<ServiceType> ServiceTypes { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<ProductCategory> ProductCategories { get; set; }
+    public DbSet<ProductType> ProductTypes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -70,6 +76,38 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             .HasOne(st => st.ServiceCategory)
             .WithMany()
             .HasForeignKey(st => st.ServiceCategoryId)
+            .OnDelete(DeleteBehavior.Cascade);
+        
+        // Inventory Bounded Context
+        // ProductCategory Table
+        builder.Entity<ProductCategory>().HasKey(pc => pc.Id);
+        builder.Entity<ProductCategory>().Property(pc => pc.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<ProductCategory>().Property(pc => pc.Name).IsRequired().HasMaxLength(100);
+        
+        // ProductType Table
+        builder.Entity<ProductType>().HasKey(pt => pt.Id);
+        builder.Entity<ProductType>().Property(pt => pt.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<ProductType>().Property(pt => pt.Name).IsRequired().HasMaxLength(100);
+        
+        // Product Table
+        builder.Entity<Product>().HasKey(p => p.Id);
+        builder.Entity<Product>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Product>().Property(p => p.Name).IsRequired().HasMaxLength(100);
+        builder.Entity<Product>().Property(p => p.Price).IsRequired();
+        builder.Entity<Product>().Property(p => p.Stock).IsRequired();
+        builder.Entity<Product>().Property(p => p.QuantitySold).IsRequired();
+        
+        // Product - ProductType Relationship
+        builder.Entity<Product>()
+            .HasOne(p => p.ProductType)
+            .WithMany()
+            .HasForeignKey(p => p.ProductTypeId);
+        
+        // ProductType - ProductCategory Relationship
+        builder.Entity<ProductType>()
+            .HasOne(pt => pt.ProductCategory)
+            .WithMany()
+            .HasForeignKey(pt => pt.ProductCategoryId)
             .OnDelete(DeleteBehavior.Cascade);
         
         // IAM Bounded Context

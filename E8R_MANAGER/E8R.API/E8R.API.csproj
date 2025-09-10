@@ -39,18 +39,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Inventory\Application\Internal\CommandServices\" />
-      <Folder Include="Inventory\Application\Internal\QueryServices\" />
-      <Folder Include="Inventory\Domain\Model\Aggregates\" />
-      <Folder Include="Inventory\Domain\Model\Commands\" />
-      <Folder Include="Inventory\Domain\Model\Entities\" />
-      <Folder Include="Inventory\Domain\Model\Queries\" />
       <Folder Include="Inventory\Domain\Model\ValueObjects\" />
-      <Folder Include="Inventory\Domain\Repositories\" />
-      <Folder Include="Inventory\Domain\Services\" />
-      <Folder Include="Inventory\Infrastructure\Persistence\EFC\Repositories\" />
-      <Folder Include="Inventory\Interfaces\REST\Resources\" />
-      <Folder Include="Inventory\Interfaces\REST\Transform\" />
       <Folder Include="ODS\Application\Internal\CommandServices\" />
       <Folder Include="ODS\Application\Internal\QueryServices\" />
       <Folder Include="ODS\Domain\Model\Aggregates\" />

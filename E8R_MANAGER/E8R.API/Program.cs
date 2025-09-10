@@ -20,6 +20,13 @@ using E8R.API.Service.Domain.Repositories;
 using E8R.API.Service.Domain.Services;
 using E8R.API.Service.Infrastructure.Persistence.EFC.Repositories;
 
+using E8R.API.Inventory.Application.Internal.CommandServices;
+using E8R.API.Inventory.Application.Internal.QueryServices;
+using E8R.API.Inventory.Domain.Repositories;
+using E8R.API.Inventory.Domain.Services;
+using E8R.API.Inventory.Infrastructure.Persistence.EFC.Repositories;
+
+
 using E8R.API.IAM.Application.Internal.CommandServices;
 using E8R.API.IAM.Application.Internal.OutboundServices;
 using E8R.API.IAM.Application.Internal.QueryServices;
@@ -152,6 +159,22 @@ builder.Services.AddScoped<IServiceTypeCommandService, ServiceTypeCommandService
 // Query
 builder.Services.AddScoped<IServiceCategoryQueryService, ServiceCategoryQueryService>();
 builder.Services.AddScoped<IServiceTypeQueryService, ServiceTypeQueryService>();
+
+// Inventory Bounded Context Injection Configuration
+// Repository
+builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+builder.Services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+// Command
+builder.Services.AddScoped<IProductCategoryCommandService, ProductCategoryCommandService>();
+builder.Services.AddScoped<IProductTypeCommandService, ProductTypeCommandService>();
+builder.Services.AddScoped<IProductCommandService, ProductCommandService>();
+
+// Query
+builder.Services.AddScoped<IProductCategoryQueryService, ProductCategoryQueryService>();
+builder.Services.AddScoped<IProductTypeQueryService, ProductTypeQueryService>();
+builder.Services.AddScoped<IProductQueryService, ProductQueryService>();
 
 
 // TokenSettings Configuration
