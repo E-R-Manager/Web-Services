@@ -86,4 +86,16 @@ public class ServiceTypeController(
             return BadRequest(new { message = "Ocurrió un error al eliminar el tipo de servicio. " + e.Message });
         }
     }
+
+    [HttpGet("service-category/{serviceCategoryId}")]
+    public async Task<IActionResult> GetServiceTypesByServiceCategoryId([FromRoute] int serviceCategoryId)
+    {
+        var serviceCategory = await serviceCategoryQueryService.Handle(new GetServiceCategoryByIdQuery(serviceCategoryId));
+        if (serviceCategory == null) return NotFound(new { message = "Service Category Id no encontrado." });
+        
+        var query = new GetServiceTypesByServiceCategoryIdQuery(serviceCategoryId);
+        var serviceTypes = await serviceTypeQueryService.Handle(query);
+        var resources = serviceTypes.Select(ServiceTypeResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
+    }
 }

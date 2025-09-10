@@ -15,5 +15,9 @@ public class ServiceTypeQueryService(IServiceTypeRepository repository) : IServi
     {
         return await repository.ListAsync();
     }
-    
+
+    public async Task<IEnumerable<ServiceType>> Handle(GetServiceTypesByServiceCategoryIdQuery query)
+    {
+        return await repository.FindByServiceCategoryIdAsync(query.ServiceCategoryId);
+    }
 }

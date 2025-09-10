@@ -19,4 +19,9 @@ public class ServiceTypeRepository : BaseRepository<ServiceType>, IServiceTypeRe
         _context.ServiceTypes.Remove(serviceType);
         await _context.SaveChangesAsync();
     }
+    
+    public async Task<IEnumerable<ServiceType>> FindByServiceCategoryIdAsync(int serviceCategoryId)
+    {
+        return await _context.ServiceTypes.Where(st => st.ServiceCategoryId == serviceCategoryId).ToListAsync();
+    }
 }

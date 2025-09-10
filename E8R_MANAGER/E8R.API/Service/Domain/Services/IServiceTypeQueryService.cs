@@ -7,4 +7,5 @@ public interface IServiceTypeQueryService
 {
     Task<IEnumerable<ServiceType>> Handle(GetAllServiceTypesQuery query);
     Task<ServiceType?> Handle(GetServiceTypeByIdQuery query);
+    Task<IEnumerable<ServiceType>> Handle(GetServiceTypesByServiceCategoryIdQuery query);
 }
