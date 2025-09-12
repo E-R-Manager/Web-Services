@@ -10,18 +10,20 @@ public class Customer
         Name = string.Empty;
         Dni = string.Empty;
         Ruc = string.Empty;
+        PhoneNumber = string.Empty;
         Email = string.Empty;
         Address = string.Empty;
         CustomerType = CustomerType.Persona;
     }
     
-    public Customer(string name, string dni, string ruc, string email, string address, CustomerType customerType)
+    public Customer(string name, string dni, string ruc, string phoneNumber, string email, string address, CustomerType customerType)
     {
-        Name = string.Empty;
-        Dni = string.Empty;
-        Ruc = string.Empty;
-        Email = string.Empty;
-        Address = string.Empty;
+        Name = name;
+        Dni = dni;
+        Ruc = ruc;
+        PhoneNumber = phoneNumber;
+        Email = email;
+        Address = address;
         CustomerType = customerType;
     }
     
@@ -30,6 +32,7 @@ public class Customer
         Name = command.Name;
         Dni = command.Dni;
         Ruc = command.Ruc;
+        PhoneNumber = command.PhoneNumber;
         Email = command.Email;
         Address = command.Address;
         CustomerType = CustomerType.Persona;
@@ -39,6 +42,7 @@ public class Customer
     public string Name { get; internal set; }
     public string Dni { get; internal set; }
     public string Ruc { get; internal set; }
+    public string PhoneNumber { get; internal set; }
     public string Email { get; internal set; }
     public string Address { get; internal set; }
     public CustomerType CustomerType { get; internal set; }

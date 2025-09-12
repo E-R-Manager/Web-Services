@@ -12,6 +12,7 @@ public static class CustomerResourceFromEntityAssembler
             entity.Name,
             entity.Dni,
             entity.Ruc,
+            entity.PhoneNumber,
             entity.Email,
             entity.Address,
             entity.CustomerType

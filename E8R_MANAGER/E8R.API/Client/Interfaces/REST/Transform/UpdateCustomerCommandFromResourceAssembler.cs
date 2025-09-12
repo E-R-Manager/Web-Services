@@ -12,6 +12,7 @@ public static class UpdateCustomerCommandFromResourceAssembler
             resource.Name,
             resource.Dni,
             resource.Ruc,
+            resource.PhoneNumber,
             resource.Email,
             resource.Address,
             resource.CustomerType
