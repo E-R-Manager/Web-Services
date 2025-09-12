@@ -26,6 +26,11 @@ using E8R.API.Inventory.Domain.Repositories;
 using E8R.API.Inventory.Domain.Services;
 using E8R.API.Inventory.Infrastructure.Persistence.EFC.Repositories;
 
+using E8R.API.ODS.Application.Internal.CommandServices;
+using E8R.API.ODS.Application.Internal.QueryServices;
+using E8R.API.ODS.Domain.Repositories;
+using E8R.API.ODS.Domain.Services;
+using E8R.API.ODS.Infrastructure.Persistence.EFC.Repositories;
 
 using E8R.API.IAM.Application.Internal.CommandServices;
 using E8R.API.IAM.Application.Internal.OutboundServices;
@@ -137,15 +142,12 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Client Bounded Context Injection Configuration
 // Repository
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
-builder.Services.AddScoped<IPhoneNumberRepository, PhoneNumberRepository>();
 
 // Command
 builder.Services.AddScoped<ICustomerCommandService, CustomerCommandService>();
-builder.Services.AddScoped<IPhoneNumberCommandService, PhoneNumberCommandService>();
 
 // Query
 builder.Services.AddScoped<ICustomerQueryService, CustomerQueryService>();
-builder.Services.AddScoped<IPhoneNumberQueryService, PhoneNumberQueryService>();
 
 // Service Bounded Context Injection Configuration
 // Repository
@@ -176,6 +178,21 @@ builder.Services.AddScoped<IProductCategoryQueryService, ProductCategoryQuerySer
 builder.Services.AddScoped<IProductTypeQueryService, ProductTypeQueryService>();
 builder.Services.AddScoped<IProductQueryService, ProductQueryService>();
 
+// ODS Bounded Context Injection Configuration
+// Repository   
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderInventoryRepository, OrderInventoryRepository>();
+builder.Services.AddScoped<IOrderServiceRepository, OrderServiceRepository>();
+
+// Command
+builder.Services.AddScoped<IOrderCommandService, OrderCommandService>();
+builder.Services.AddScoped<IOrderInventoryCommandService, OrderInventoryCommandService>();
+builder.Services.AddScoped<IOrderServiceCommandService, OrderServiceCommandService>();
+
+// Query
+builder.Services.AddScoped<IOrderQueryService, OrderQueryService>();
+builder.Services.AddScoped<IOrderInventoryQueryService, OrderInventoryQueryService>();
+builder.Services.AddScoped<IOrderServiceQueryService, OrderServiceQueryService>();
 
 // TokenSettings Configuration
 builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));

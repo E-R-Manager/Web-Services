@@ -40,17 +40,5 @@
 
     <ItemGroup>
       <Folder Include="Inventory\Domain\Model\ValueObjects\" />
-      <Folder Include="ODS\Application\Internal\CommandServices\" />
-      <Folder Include="ODS\Application\Internal\QueryServices\" />
-      <Folder Include="ODS\Domain\Model\Aggregates\" />
-      <Folder Include="ODS\Domain\Model\Commands\" />
-      <Folder Include="ODS\Domain\Model\Entities\" />
-      <Folder Include="ODS\Domain\Model\Queries\" />
-      <Folder Include="ODS\Domain\Model\ValueObjects\" />
-      <Folder Include="ODS\Domain\Repositories\" />
-      <Folder Include="ODS\Domain\Services\" />
-      <Folder Include="ODS\Infrastructure\Persistence\EFC\Repositories\" />
-      <Folder Include="ODS\Interfaces\REST\Resources\" />
-      <Folder Include="ODS\Interfaces\REST\Transform\" />
     </ItemGroup>
 </Project>

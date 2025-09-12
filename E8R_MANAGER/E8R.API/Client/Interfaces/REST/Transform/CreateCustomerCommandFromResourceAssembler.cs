@@ -11,6 +11,7 @@ public static class CreateCustomerCommandFromResourceAssembler
             resource.Name,
             resource.Dni,
             resource.Ruc,
+            resource.PhoneNumber,
             resource.Email,
             resource.Address,
             resource.CustomerType
