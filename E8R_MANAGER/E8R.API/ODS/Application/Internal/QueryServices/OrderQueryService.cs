@@ -16,4 +16,8 @@ public class OrderQueryService(IOrderRepository orderRepository) : IOrderQuerySe
     {
         return await orderRepository.ListAsync();
     }
+    public async Task<IEnumerable<Order>> Handle(GetOrdersByCustomerIdQuery query)
+    {
+        return await orderRepository.FindByCustomerIdAsync(query.CustomerId);
+    }
 }

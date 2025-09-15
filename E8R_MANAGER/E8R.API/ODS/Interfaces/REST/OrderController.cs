@@ -1,14 +1,19 @@
+using E8R.API.Client.Domain.Model.Queries;
 using E8R.API.ODS.Domain.Model.Queries;
 using E8R.API.ODS.Domain.Services;
 using E8R.API.ODS.Interfaces.REST.Resources;
 using E8R.API.ODS.Interfaces.REST.Transform;
+using E8R.API.Client.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E8R.API.ODS.Interfaces.REST;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-public class OrderController (IOrderCommandService orderCommandService, IOrderQueryService orderQueryService)
+public class OrderController (
+    IOrderCommandService orderCommandService, 
+    IOrderQueryService orderQueryService,
+    ICustomerQueryService customerQueryService)
     : ControllerBase
 {
     [HttpGet]
@@ -82,5 +87,17 @@ public class OrderController (IOrderCommandService orderCommandService, IOrderQu
         {
             return BadRequest(new { message = "Ocurrió un error al eliminar la orden. " + e.Message });
         }
+    }
+
+    [HttpGet("customer/{customerId}")]
+    public async Task<IActionResult> GetOrdersByCustomerId([FromRoute] int customerId)
+    {
+        var customer = await customerQueryService.Handle(new GetCustomerByIdQuery(customerId));
+        if (customer == null) return NotFound(new { message = $"No se encontró el cliente con id {customerId}." });
+        
+        var query = new GetOrdersByCustomerIdQuery(customerId);
+        var orders = await orderQueryService.Handle(query);
+        var resources = orders.Select(OrderResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
     }
 }
