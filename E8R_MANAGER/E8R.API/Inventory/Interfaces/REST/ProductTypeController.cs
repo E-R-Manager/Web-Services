@@ -73,12 +73,12 @@ public class ProductTypeController(
         {
             var productType = await productTypeQueryService.Handle(new GetProductTypeByIdQuery(productTypeId));
             if (productType == null) return NotFound();
-
+            
             var resource = new DeleteProductTypeResource(productTypeId);
             var command = DeleteProductTypeCommandFromResourceAssembler.ToCommandFromResource(resource);
             var result = await productTypeCommandService.Handle(command);
             if (!result) return BadRequest(new { message = "No se pudo eliminar el tipo de producto." });
-
+            
             return Ok(new { message = $"El tipo de producto con id {productTypeId} se ha borrado correctamente." });
         }
         catch (Exception e)

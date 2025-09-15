@@ -18,4 +18,9 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
         _context.Products.Remove(product);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<Product>> FindByProductTypeIdAsync(int productTypeId)
+    {
+        return await _context.Products.Where(p => p.ProductTypeId == productTypeId).ToListAsync();
+    }
 }

@@ -8,7 +8,10 @@ namespace E8R.API.Inventory.Interfaces.REST;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-public class ProductController(IProductCommandService productCommandService, IProductQueryService productQueryService)
+public class ProductController(
+    IProductCommandService productCommandService, 
+    IProductQueryService productQueryService,
+    IProductTypeQueryService productTypeQueryService)
     : ControllerBase
 {
     [HttpGet]
@@ -82,5 +85,17 @@ public class ProductController(IProductCommandService productCommandService, IPr
         {
             return BadRequest(new { message = "Ocurrió un error al eliminar el producto. " + e.Message });
         }
+    }
+
+    [HttpGet("product-type/{productTypeId}")]
+    public async Task<IActionResult> GetProductsByProductTypeId([FromRoute] int productTypeId)
+    {
+        var productType = await productTypeQueryService.Handle(new GetProductTypeByIdQuery(productTypeId));
+        if (productType == null) return NotFound(new { message = $"No se encontró el tipo de producto con id {productTypeId}." });
+        
+        var query = new GetProductsByProductTypeIdQuery(productTypeId);
+        var products = await productQueryService.Handle(query);
+        var resources = products.Select(ProductResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
     }
 }
