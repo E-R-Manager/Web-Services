@@ -32,11 +32,20 @@ public class OrderCommandService(
         {
             return null;
         }
-        order.CustomerId = command.CustomerId;
-        order.CustomerName = command.CustomerName;
-        order.CustomerDni = command.CustomerDni;
-        order.CustomerPhoneNumber = command.CustomerPhoneNumber;
-        order.CustomerAddress = command.CustomerAddress;
+
+        if (order.CustomerId != command.CustomerId)
+        {
+            var customer = await customerRepository.FindByIdAsync(command.CustomerId);
+            if (customer == null)
+            {
+                throw new ArgumentException("Customer Id no encontrado.");
+            }
+            order.CustomerId = customer.Id;
+            order.CustomerName = customer.Name;
+            order.CustomerDni = customer.Dni;
+            order.CustomerPhoneNumber = customer.PhoneNumber;
+            order.CustomerAddress = customer.Address;
+        }
         order.OrderDate = command.OrderDate;
         order.OrderState = command.OrderState;
 

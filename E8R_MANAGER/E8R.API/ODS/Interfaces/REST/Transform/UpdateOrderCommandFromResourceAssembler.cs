@@ -10,10 +10,6 @@ public static class UpdateOrderCommandFromResourceAssembler
         return new UpdateOrderCommand(
             orderId,
             resource.CustomerId,
-            resource.CustomerName,
-            resource.CustomerDni,
-            resource.CustomerPhoneNumber,
-            resource.CustomerAddress,
             resource.OrderDate,
             resource.OrderState
         );

@@ -19,7 +19,6 @@ public class ServiceCategory
     public ServiceCategory(CreateServiceCategoryCommand categoryCommand)
     {
         Name = categoryCommand.Name;
-        ContractedAmount = categoryCommand.ContractedAmount;
     }
 
     public int Id { get; internal set; }

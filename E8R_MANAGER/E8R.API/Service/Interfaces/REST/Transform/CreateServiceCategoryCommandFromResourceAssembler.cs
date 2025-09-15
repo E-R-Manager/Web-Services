@@ -8,8 +8,7 @@ public static class CreateServiceCategoryCommandFromResourceAssembler
     public static CreateServiceCategoryCommand ToCommandFromResource(CreateServiceCategoryResource resource)
     {
         return new CreateServiceCategoryCommand(
-            resource.Name,
-            resource.ContractedAmount
+            resource.Name
         );
     }
 }

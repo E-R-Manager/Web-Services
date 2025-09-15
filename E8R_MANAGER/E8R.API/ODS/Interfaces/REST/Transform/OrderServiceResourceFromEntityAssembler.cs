@@ -10,7 +10,7 @@ public static class OrderServiceResourceFromEntityAssembler
         return new OrderServiceResource(
             entity.Id,
             entity.OrderId,
-            entity.ServiceId,
+            entity.ServiceTypeId,
             entity.ServiceCategoryName,
             entity.ServiceTypeName,
             entity.Details,

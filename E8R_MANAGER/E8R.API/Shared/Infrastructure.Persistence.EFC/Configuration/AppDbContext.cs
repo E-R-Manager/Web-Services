@@ -159,9 +159,9 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
 
         // OrderService - ServiceType Relationship
         builder.Entity<OrderService>()
-            .HasOne(os => os.Service)
+            .HasOne(os => os.ServiceType)
             .WithMany()
-            .HasForeignKey(os => os.ServiceId);
+            .HasForeignKey(os => os.ServiceTypeId);
 
     // IAM Bounded Context
         builder.Entity<User>().HasKey(u => u.Id);

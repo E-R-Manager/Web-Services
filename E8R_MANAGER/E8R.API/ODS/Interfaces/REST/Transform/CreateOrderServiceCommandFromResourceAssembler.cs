@@ -9,9 +9,7 @@ public static class CreateOrderServiceCommandFromResourceAssembler
     {
         return new CreateOrderServiceCommand(
             resource.OrderId,
-            resource.ServiceId,
-            resource.ServiceCategoryName,
-            resource.ServiceTypeName,
+            resource.ServiceTypeId,
             resource.Details,
             resource.Price
         );

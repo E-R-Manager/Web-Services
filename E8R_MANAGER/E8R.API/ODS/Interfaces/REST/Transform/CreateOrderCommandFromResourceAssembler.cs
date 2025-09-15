@@ -9,10 +9,6 @@ public static class CreateOrderCommandFromResourceAssembler
     {
         return new CreateOrderCommand(
             resource.CustomerId,
-            resource.CustomerName,
-            resource.CustomerDni,
-            resource.CustomerPhoneNumber,
-            resource.CustomerAddress,
             resource.OrderDate,
             resource.OrderState
         );

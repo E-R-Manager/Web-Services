@@ -9,7 +9,7 @@ public class OrderService
     public OrderService()
     {
         Order = new Order();
-        Service = new ServiceType();
+        ServiceType = new ServiceType();
         ServiceCategoryName = string.Empty;
         ServiceTypeName = string.Empty;
         Details = string.Empty;
@@ -19,8 +19,8 @@ public class OrderService
     public OrderService(
         Order order, 
         int orderId, 
-        ServiceType service, 
-        int serviceId,
+        ServiceType serviceType, 
+        int serviceTypeId,
         string serviceCategoryName,
         string serviceTypeName,
         string details,
@@ -28,22 +28,22 @@ public class OrderService
     {
         Order = order;
         OrderId = orderId;
-        Service = service;
-        ServiceId = serviceId;
+        ServiceType = serviceType;
+        ServiceTypeId = serviceTypeId;
         ServiceCategoryName = serviceCategoryName;
         ServiceTypeName = serviceTypeName;
         Details = details;
         Price = price;
     }
 
-    public OrderService(CreateOrderServiceCommand command, Order order, ServiceType service)
+    public OrderService(CreateOrderServiceCommand command, Order order, ServiceType serviceType)
     {
         Order = order;
         OrderId = order.Id;
-        Service = service;
-        ServiceId = service.Id;
-        ServiceCategoryName = service.ServiceCategory.Name;
-        ServiceTypeName = service.Name;
+        ServiceType = serviceType;
+        ServiceTypeId = serviceType.Id;
+        ServiceCategoryName = serviceType.ServiceCategory.Name;
+        ServiceTypeName = serviceType.Name;
         Details = command.Details;
         Price = command.Price;
     }
@@ -51,8 +51,8 @@ public class OrderService
     public int Id { get; set; }
     public Order Order { get; internal set; }
     public int OrderId { get; internal set; }
-    public ServiceType Service { get; internal set; }
-    public int ServiceId { get; internal set; }
+    public ServiceType ServiceType { get; internal set; }
+    public int ServiceTypeId { get; internal set; }
     public string ServiceCategoryName { get; internal set; }
     public string ServiceTypeName { get; internal set; }
     public string Details { get; internal set; }

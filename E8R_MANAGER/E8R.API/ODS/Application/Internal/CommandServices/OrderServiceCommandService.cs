@@ -11,56 +11,72 @@ public class OrderServiceCommandService(
     IOrderServiceRepository orderServiceRepository,
     IOrderRepository orderRepository,
     IServiceTypeRepository serviceTypeRepository,
+    IServiceCategoryRepository serviceCategoryRepository,
     IUnitOfWork unitOfWork) : IOrderServiceCommandService
 {
     public async Task<OrderService?> Handle(CreateOrderServiceCommand command)
     {
-        var serviceType = await serviceTypeRepository.FindByIdAsync(command.ServiceId);
+        var serviceType = await serviceTypeRepository.FindByIdAsync(command.ServiceTypeId);
         if (serviceType == null)
         {
             throw new ArgumentException("ServiceType Id no encontrado.");
+        }
+        var serviceCategory = await serviceCategoryRepository.FindByIdAsync(serviceType.ServiceCategoryId);
+        if (serviceCategory == null)
+        {
+            throw new ArgumentException("ServiceCategory Id no encontrado.");
         }
         var order = await orderRepository.FindByIdAsync(command.OrderId);
         if (order == null)
         {
             throw new ArgumentException("Order Id no encontrado.");
         }
-        var service = new OrderService(command, order, serviceType);
-        await orderServiceRepository.AddAsync(service);
+        var orderService = new OrderService(command, order, serviceType);
+        await orderServiceRepository.AddAsync(orderService);
         await unitOfWork.CompleteAsync();
-        return service;
+        return orderService;
     }
 
     public async Task<OrderService?> Handle(UpdateOrderServiceCommand command)
     {
-        var service = await orderServiceRepository.FindByIdAsync(command.OrderServiceId);
-        if (service == null)
+        var orderService = await orderServiceRepository.FindByIdAsync(command.OrderServiceId);
+        if (orderService == null)
         {
             return null;
         }
-        var serviceType = await serviceTypeRepository.FindByIdAsync(command.ServiceId);
-        if (serviceType == null)
+
+        if (orderService.ServiceTypeId != command.ServiceTypeId)
         {
-            throw new ArgumentException("ServiceType Id no encontrado.");
+            var serviceType = await serviceTypeRepository.FindByIdAsync(command.ServiceTypeId);
+            if (serviceType == null)
+            {
+                throw new ArgumentException("ServiceType Id no encontrado.");
+            }
+            orderService.ServiceTypeId = serviceType.Id;
+            orderService.ServiceTypeName = serviceType.Name;
+            
+            var serviceCategory = await serviceCategoryRepository.FindByIdAsync(serviceType.ServiceCategoryId);
+            if (serviceCategory == null)
+            {
+                throw new ArgumentException("ServiceCategory Id no encontrado.");
+            }
+            orderService.ServiceCategoryName = serviceCategory.Name;
         }
-        service.ServiceId = command.ServiceId;
-        service.ServiceTypeName = command.ServiceTypeName;
-        service.ServiceCategoryName = command.ServiceCategoryName;
-        service.Details = command.Details;
-        service.Price = command.Price;
+        orderService.Details = command.Details;
+        orderService.Price = command.Price;
         
         await unitOfWork.CompleteAsync();
-        return service;
+        return orderService;
     }
 
     public async Task<bool> Handle(DeleteOrderServiceCommand command)
     {
-        var service = await orderServiceRepository.FindByIdAsync(command.OrderServiceId);
-        if (service == null)
+        var orderService = await orderServiceRepository.FindByIdAsync(command.OrderServiceId);
+        if (orderService == null)
         {
             return false;
         }
-        await orderServiceRepository.RemoveAsync(service);
+        await orderServiceRepository.RemoveAsync(orderService);
         await unitOfWork.CompleteAsync();
         return true;
     }

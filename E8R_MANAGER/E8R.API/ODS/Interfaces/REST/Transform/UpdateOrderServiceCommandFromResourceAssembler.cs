@@ -9,9 +9,7 @@ public static class UpdateOrderServiceCommandFromResourceAssembler
     {
         return new UpdateOrderServiceCommand(
             orderServiceId,
-            resource.ServiceId,
-            resource.ServiceCategoryName,
-            resource.ServiceTypeName,
+            resource.ServiceTypeId,
             resource.Details,
             resource.Price
         );

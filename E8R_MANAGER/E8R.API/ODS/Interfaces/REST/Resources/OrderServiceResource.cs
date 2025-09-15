@@ -3,7 +3,7 @@ namespace E8R.API.ODS.Interfaces.REST.Resources;
 public record OrderServiceResource(
     int Id,
     int OrderId,
-    int ServiceId,
+    int ServiceTypeId,
     string ServiceCategoryName,
     string ServiceTypeName,
     string Details,
