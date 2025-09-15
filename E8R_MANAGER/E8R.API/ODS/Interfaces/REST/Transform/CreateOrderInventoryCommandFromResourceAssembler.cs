@@ -10,8 +10,6 @@ public static class CreateOrderInventoryCommandFromResourceAssembler
         return new CreateOrderInventoryCommand(
             resource.OrderId,
             resource.ProductId,
-            resource.ProductName,
-            resource.ProductPrice,
             resource.Quantity
         );
     }

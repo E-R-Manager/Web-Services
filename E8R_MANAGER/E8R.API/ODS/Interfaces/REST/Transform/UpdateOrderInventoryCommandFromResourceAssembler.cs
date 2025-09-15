@@ -10,8 +10,6 @@ public static class UpdateOrderInventoryCommandFromResourceAssembler
         return new UpdateOrderInventoryCommand(
             orderInventoryId,
             resource.ProductId,
-            resource.ProductName,
-            resource.ProductPrice,
             resource.Quantity
         );
     }

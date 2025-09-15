@@ -38,14 +38,19 @@ public class OrderInventoryCommandService(
         {
             return null;
         }
-        var product = await productRepository.FindByIdAsync(command.ProductId);
-        if (product == null)
+
+        if (orderInventory.ProductId != command.ProductId)
         {
-            throw new ArgumentException("Product Id no encontrado.");
+            var product = await productRepository.FindByIdAsync(command.ProductId);
+            if (product == null)
+            {
+                throw new ArgumentException("Product Id no encontrado.");
+            }
+
+            orderInventory.ProductId = product.Id;
+            orderInventory.ProductName = product.Name;
+            orderInventory.ProductPrice = product.Price;
         }
-        orderInventory.ProductId = command.ProductId;
-        orderInventory.ProductName = command.ProductName;
-        orderInventory.ProductPrice = command.ProductPrice;
         orderInventory.Quantity = command.Quantity;
 
         await unitOfWork.CompleteAsync();
