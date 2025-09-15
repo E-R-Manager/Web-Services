@@ -6,4 +6,5 @@ namespace E8R.API.Inventory.Domain.Repositories;
 public interface IProductTypeRepository : IBaseRepository<ProductType>
 {
     Task RemoveAsync(ProductType productType);
+    Task <IEnumerable<ProductType>> FindByProductCategoryIdAsync(int productCategoryId);
 }

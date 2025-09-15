@@ -9,6 +9,7 @@ namespace E8R.API.Inventory.Application.Internal.CommandServices;
 public class ProductCommandService(
     IProductRepository productRepository,
     IProductTypeRepository productTypeRepository,
+    IProductCategoryRepository productCategoryRepository,
     IUnitOfWork unitOfWork) : IProductCommandService
 {
     public async Task<Product?> Handle(CreateProductCommand command)
@@ -17,6 +18,11 @@ public class ProductCommandService(
         if (productType == null)
         {
             throw new ArgumentException("ProductType Id no encontrado.");
+        }
+        var productCategory = await productCategoryRepository.FindByIdAsync(productType.ProductCategoryId);
+        if (productCategory == null)
+        {
+            throw new ArgumentException("ProductCategory Id no encontrado.");
         }
         var product = new Product(command, productType);
         await productRepository.AddAsync(product);
@@ -31,7 +37,25 @@ public class ProductCommandService(
         {
             return null;
         }
-        product.ProductTypeId = command.ProductTypeId;
+
+        if (product.ProductTypeId != command.ProductTypeId)
+        {
+            var productType = await productTypeRepository.FindByIdAsync(command.ProductTypeId);
+            if (productType == null)
+            {
+                throw new ArgumentException("ProductType Id no encontrado.");
+            }
+            product.ProductTypeId = productType.Id;
+            product.ProductTypeName = productType.Name;
+            
+            var productCategory = await productCategoryRepository.FindByIdAsync(productType.ProductCategoryId);
+            if (productCategory == null)
+            {
+                throw new ArgumentException("ProductCategory Id no encontrado.");
+            }
+            product.ProductCategoryName = productCategory.Name;
+        }
+        
         product.Name = command.Name;
         product.Price = command.Price;
         product.Stock = command.Stock;

@@ -7,4 +7,5 @@ public interface IProductTypeQueryService
 {
     Task<IEnumerable<ProductType>> Handle(GetAllProductTypesQuery query);
     Task<ProductType?> Handle(GetProductTypeByIdQuery query);
+    Task<IEnumerable<ProductType>> Handle(GetProductTypesByProductCategoryIdQuery query);
 }

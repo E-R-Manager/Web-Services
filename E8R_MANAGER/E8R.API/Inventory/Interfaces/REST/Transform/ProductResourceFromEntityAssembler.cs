@@ -10,6 +10,8 @@ public static class ProductResourceFromEntityAssembler
         return new ProductResource(
             entity.Id,
             entity.ProductTypeId,
+            entity.ProductTypeName,
+            entity.ProductCategoryName,
             entity.Name,
             entity.Stock,
             entity.Price,
