@@ -2,13 +2,18 @@ using E8R.API.ODS.Domain.Model.Queries;
 using E8R.API.ODS.Domain.Services;
 using E8R.API.ODS.Interfaces.REST.Resources;
 using E8R.API.ODS.Interfaces.REST.Transform;
+using E8R.API.Inventory.Domain.Services;
+using E8R.API.Inventory.Domain.Model.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E8R.API.ODS.Interfaces.REST;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-public class OrderInventoryController(IOrderInventoryCommandService orderInventoryCommandService, IOrderInventoryQueryService orderInventoryQueryService)
+public class OrderInventoryController(
+    IOrderInventoryCommandService orderInventoryCommandService, 
+    IOrderInventoryQueryService orderInventoryQueryService,
+    IProductQueryService productQueryService)
     : ControllerBase
 {
     [HttpGet]
@@ -82,5 +87,17 @@ public class OrderInventoryController(IOrderInventoryCommandService orderInvento
         {
             return BadRequest(new { message = "Ocurrió un error al eliminar el inventario de orden. " + e.Message });
         }
+    }
+
+    [HttpGet("product/{productId}")]
+    public async Task<IActionResult> GetOrderInventoriesByProductId([FromRoute] int productId)
+    {
+        var product = await productQueryService.Handle(new GetProductByIdQuery(productId));
+        if (product == null) return NotFound(new { message = $"No se encontró el producto con id {productId}." });
+        
+        var query = new GetOrderInventoriesByProductIdQuery(productId);
+        var orderInventories = await orderInventoryQueryService.Handle(query);
+        var resources = orderInventories.Select(OrderInventoryResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
     }
 }

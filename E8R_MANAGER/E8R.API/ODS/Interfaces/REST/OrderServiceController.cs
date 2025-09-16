@@ -2,13 +2,18 @@ using E8R.API.ODS.Domain.Model.Queries;
 using E8R.API.ODS.Domain.Services;
 using E8R.API.ODS.Interfaces.REST.Resources;
 using E8R.API.ODS.Interfaces.REST.Transform;
+using E8R.API.Service.Domain.Services;
+using E8R.API.Service.Domain.Model.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E8R.API.ODS.Interfaces.REST;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-public class OrderServiceController(IOrderServiceCommandService orderServiceCommandService, IOrderServiceQueryService orderServiceQueryService)
+public class OrderServiceController(
+    IOrderServiceCommandService orderServiceCommandService, 
+    IOrderServiceQueryService orderServiceQueryService,
+    IServiceTypeQueryService serviceTypeQueryService)
     : ControllerBase
 {
     [HttpGet]
@@ -82,5 +87,17 @@ public class OrderServiceController(IOrderServiceCommandService orderServiceComm
         {
             return BadRequest(new { message = "Ocurrió un error al eliminar el servicio de orden. " + e.Message });
         }
+    }
+
+    [HttpGet("service-types/{serviceTypeId}")]
+    public async Task<IActionResult> GetOrderServicesByServiceTypeId([FromRoute] int serviceTypeId)
+    {
+        var serviceType = await serviceTypeQueryService.Handle(new GetServiceTypeByIdQuery(serviceTypeId));
+        if (serviceType == null) return NotFound(new { message = $"El tipo de servicio con id {serviceTypeId} no existe." });
+        
+        var query = new GetOrderServicesByServiceTypeIdQuery(serviceTypeId);
+        var orderServices = await orderServiceQueryService.Handle(query);
+        var resources = orderServices.Select(OrderServiceResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
     }
 }

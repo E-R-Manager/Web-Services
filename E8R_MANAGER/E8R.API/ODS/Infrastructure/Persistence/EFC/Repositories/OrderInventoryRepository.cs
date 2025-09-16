@@ -20,4 +20,9 @@ public class OrderInventoryRepository : BaseRepository<OrderInventory>, IOrderIn
         _context.OrderInventories.Remove(orderInventory);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<OrderInventory>> FindByProductIdAsync(int productId)
+    {
+        return await _context.OrderInventories.Where(oi => oi.ProductId == productId).ToListAsync();
+    }
 }

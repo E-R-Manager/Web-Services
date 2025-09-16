@@ -7,4 +7,5 @@ public interface IOrderServiceQueryService
 {
     Task<IEnumerable<OrderService>> Handle(GetAllOrdersServiceQuery query);
     Task<OrderService?> Handle(GetOrderServiceByIdQuery query);
+    Task<IEnumerable<OrderService>> Handle(GetOrderServicesByServiceTypeIdQuery query);
 }

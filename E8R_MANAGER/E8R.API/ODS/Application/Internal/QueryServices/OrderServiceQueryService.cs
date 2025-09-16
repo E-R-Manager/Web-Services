@@ -16,4 +16,9 @@ public class OrderServiceQueryService(IOrderServiceRepository orderServiceReposi
     {
         return await orderServiceRepository.ListAsync();
     }
+    
+    public async Task<IEnumerable<OrderService>> Handle(GetOrderServicesByServiceTypeIdQuery query)
+    {
+        return await orderServiceRepository.FindByServiceTypeIdAsync(query.ServiceTypeId);
+    }
 }

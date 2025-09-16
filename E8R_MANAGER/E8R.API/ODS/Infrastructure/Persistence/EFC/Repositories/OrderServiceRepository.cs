@@ -21,4 +21,8 @@ public class OrderServiceRepository : BaseRepository<OrderService>, IOrderServic
         await _context.SaveChangesAsync();
     }
 
+    public async Task<IEnumerable<OrderService>> FindByServiceTypeIdAsync(int serviceTypeId)
+    {
+        return await _context.OrderServices.Where(os => os.ServiceTypeId == serviceTypeId).ToListAsync();
+    }
 }

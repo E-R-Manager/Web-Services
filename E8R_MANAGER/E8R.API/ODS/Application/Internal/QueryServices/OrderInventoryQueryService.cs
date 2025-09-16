@@ -16,4 +16,9 @@ public class OrderInventoryQueryService(IOrderInventoryRepository orderInventory
     {
         return await orderInventoryRepository.ListAsync();
     }
+    
+    public async Task<IEnumerable<OrderInventory>> Handle(GetOrderInventoriesByProductIdQuery query)
+    {
+        return await orderInventoryRepository.FindByProductIdAsync(query.ProductId);
+    }
 }
