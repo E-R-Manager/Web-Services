@@ -48,4 +48,25 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
     {
         return await _context.Customers.AnyAsync(c => c.Ruc == ruc && c.Id != excludeId);
     }
+    
+    public async Task<IEnumerable<Customer>> FindByNameAsync(string name)
+    {
+        return await _context.Customers
+            .Where(c => c.Name.Contains(name))
+            .ToListAsync();
+    }
+    
+    public async Task<IEnumerable<Customer>> FindByDniAsync(string dni)
+    {
+        return await _context.Customers
+            .Where(c => c.Dni.Contains(dni))
+            .ToListAsync();
+    }
+    
+    public async Task<IEnumerable<Customer>> FindByRucAsync(string ruc)
+    {
+        return await _context.Customers
+            .Where(c => c.Ruc.Contains(ruc))
+            .ToListAsync();
+    }
 }

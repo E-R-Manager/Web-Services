@@ -79,4 +79,32 @@ public class CustomerController(ICustomerCommandService customerCommandService, 
             return BadRequest(new { message = "Ocurrió un error al eliminar el cliente. " + e.Message });
         }
     }
+
+    [HttpGet("client-name/{name}")]
+    public async Task<IActionResult> GetCustomersByName([FromRoute] string name)
+    {
+        var query = new GetCustomersByNameQuery(name);
+        var customers = await customerQueryService.Handle(query);
+        var resources = customers.Select(CustomerResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
+    }
+
+    [HttpGet("client-dni/{dni}")]
+    public async Task<IActionResult> GetCustomersByDni([FromRoute] string dni)
+    {
+        var query = new GetCustomersByDniQuery(dni);
+        var customers = await customerQueryService.Handle(query);
+        var resources = customers.Select(CustomerResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
+    }
+
+    [HttpGet("client-ruc/{ruc}")]
+    public async Task<IActionResult> GetCustomersByRuc([FromRoute] string ruc)
+    {
+        var query = new GetCustomersByRucQuery(ruc);
+        var customers = await customerQueryService.Handle(query);
+        var resources = customers.Select(CustomerResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
+    }
+    
 }

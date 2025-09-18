@@ -12,4 +12,8 @@ public interface ICustomerRepository: IBaseRepository<Customer>
     Task<bool> ExistsByDniAsync(string dni, int excludeId);
     Task<bool> ExistsByRucAsync(string ruc);
     Task<bool> ExistsByRucAsync(string ruc, int excludeId);
+    
+    Task <IEnumerable<Customer>> FindByNameAsync(string name);
+    Task <IEnumerable<Customer>> FindByDniAsync(string dni);
+    Task <IEnumerable<Customer>> FindByRucAsync(string ruc);
 }
