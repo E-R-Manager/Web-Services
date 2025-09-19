@@ -7,5 +7,4 @@ public interface IOrderCommandService
 {
     Task<Order?> Handle(CreateOrderCommand command);
     Task<Order?> Handle(UpdateOrderCommand command);
-    Task<bool> Handle(DeleteOrderCommand command);
 }

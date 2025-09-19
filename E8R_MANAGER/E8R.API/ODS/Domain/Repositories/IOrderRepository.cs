@@ -6,7 +6,6 @@ namespace E8R.API.ODS.Domain.Repositories;
 
 public interface IOrderRepository : IBaseRepository<Order>
 {
-    Task RemoveAsync(Order order);
     Task <IEnumerable<Order>> FindByCustomerIdAsync(int customerId);
     Task <IEnumerable<Order>> FindByOrderDateAsync(int year, int? month, int? day);
     Task <IEnumerable<Order>> FindByOrderStateAsync(OrderState orderState);

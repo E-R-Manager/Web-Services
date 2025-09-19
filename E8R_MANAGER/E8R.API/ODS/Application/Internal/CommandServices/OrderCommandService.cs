@@ -52,16 +52,4 @@ public class OrderCommandService(
         await unitOfWork.CompleteAsync();
         return order;
     }
-
-    public async Task<bool> Handle(DeleteOrderCommand command)
-    {
-        var order = await orderRepository.FindByIdAsync(command.OrderId);
-        if (order == null)
-        {
-            return false;
-        }
-        await orderRepository.RemoveAsync(order);
-        await unitOfWork.CompleteAsync();
-        return true;
-    }
 }

@@ -86,27 +86,6 @@ public class OrderController (
             return BadRequest(new { message = "Ocurrió un error al actualizar la orden. " + e.Message });
         }
     }
-    
-    [HttpDelete("{orderId}")]
-    public async Task<IActionResult> DeleteOrder([FromRoute] int orderId)
-    {
-        try
-        {
-            var product = await orderQueryService.Handle(new GetOrderByIdQuery(orderId));
-            if (product == null) return NotFound();
-
-            var resource = new DeleteOrderResource(orderId);
-            var command = DeleteOrderCommandFromResourceAssembler.ToCommandFromResource(resource);
-            var result = await orderCommandService.Handle(command);
-            if (!result) return BadRequest(new { message = "No se pudo eliminar la orden." });
-
-            return Ok(new { message = $"El producto con id {orderId} se ha borrado correctamente." });
-        }
-        catch (Exception e)
-        {
-            return BadRequest(new { message = "Ocurrió un error al eliminar la orden. " + e.Message });
-        }
-    }
 
     [HttpGet("customer/{customerId}")]
     public async Task<IActionResult> GetOrdersByCustomerId([FromRoute] int customerId)

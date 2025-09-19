@@ -12102,19 +12102,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Adolfo PC\\.nuget\\packages\\": {}
+    "C:\\Users\\TALLER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Adolfo PC\\Documents\\GitHub\\Web-Services\\E8R_MANAGER\\E8R.API\\E8R.API.csproj",
+      "projectUniqueName": "C:\\Users\\TALLER\\Documents\\GitHub\\Web-Services\\E8R_MANAGER\\E8R.API\\E8R.API.csproj",
       "projectName": "E8R.API",
-      "projectPath": "C:\\Users\\Adolfo PC\\Documents\\GitHub\\Web-Services\\E8R_MANAGER\\E8R.API\\E8R.API.csproj",
-      "packagesPath": "C:\\Users\\Adolfo PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Adolfo PC\\Documents\\GitHub\\Web-Services\\E8R_MANAGER\\E8R.API\\obj\\",
+      "projectPath": "C:\\Users\\TALLER\\Documents\\GitHub\\Web-Services\\E8R_MANAGER\\E8R.API\\E8R.API.csproj",
+      "packagesPath": "C:\\Users\\TALLER\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\TALLER\\Documents\\GitHub\\Web-Services\\E8R_MANAGER\\E8R.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Adolfo PC\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\TALLER\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -12243,7 +12243,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\Adolfo PC\\.dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\TALLER\\.dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
