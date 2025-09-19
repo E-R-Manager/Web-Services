@@ -24,6 +24,25 @@ public class OrderController (
         var resources = orders.Select(OrderResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(resources);
     }
+    
+    [HttpGet("paginated")]
+    public async Task<IActionResult> GetAllOrdersPaginated([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+    {
+        if (page <= 0 || pageSize <= 0)
+            return BadRequest(new { message = "Los parámetros de paginación deben ser mayores a cero." });
+
+        var query = new GetAllOrdersPaginationQuery(page, pageSize);
+        var (orders, totalCount) = await orderQueryService.Handle(query);
+        var resources = orders.Select(OrderResourceFromEntityAssembler.ToResourceFromEntity);
+
+        return Ok(new
+        {
+            TotalCount = totalCount,
+            Page = page,
+            PageSize = pageSize,
+            Orders = resources
+        });
+    }
 
     [HttpGet("{orderId}")]
     public async Task<IActionResult> GetOrderById([FromRoute] int orderId)
@@ -101,11 +120,15 @@ public class OrderController (
         return Ok(resources);
     }
     
-    [HttpGet("order-date/{orderDate}")]
-    public async Task<IActionResult> GetOrdersByOrderDate([FromRoute] DateOnly orderDate)
+    [HttpGet("order-date")]
+    public async Task<IActionResult> GetOrdersByOrderDate(
+        [FromQuery] int year,
+        [FromQuery] int? month,
+        [FromQuery] int? day)
     {
-        var query = new GetOrdersByOrderDateQuery(orderDate);
-        var orders = await orderQueryService.Handle(query);
+        if (year <= 0) return BadRequest(new { message = "El año es obligatorio y debe ser válido." });
+
+        var orders = await orderQueryService.Handle(new GetOrdersByOrderDateQuery(year, month, day));
         var resources = orders.Select(OrderResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(resources);
     }

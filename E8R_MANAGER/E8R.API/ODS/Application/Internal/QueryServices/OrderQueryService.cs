@@ -22,10 +22,14 @@ public class OrderQueryService(IOrderRepository orderRepository) : IOrderQuerySe
     }
     public async Task<IEnumerable<Order>> Handle(GetOrdersByOrderDateQuery query)
     {
-        return await orderRepository.FindByOrderDateAsync(query.OrderDate);
+        return await orderRepository.FindByOrderDateAsync(query.Year, query.Month, query.Day);
     }
     public async Task<IEnumerable<Order>> Handle(GetOrdersByOrderStateQuery query)
     {
         return await orderRepository.FindByOrderStateAsync(query.OrderState);
+    }
+    public async Task<(IEnumerable<Order> Orders, int TotalCount)> Handle(GetAllOrdersPaginationQuery query)
+    {
+        return await orderRepository.GetAllOrdersPaginationQueryAsync(query.Page, query.PageSize);
     }
 }
