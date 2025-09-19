@@ -13,8 +13,6 @@ public class CustomerCommandService(ICustomerRepository customerRepository, IUni
     public async Task<Customer?> Handle(CreateCustomerCommand command)
     {
         // Validaciones de unicidad
-        if (await customerRepository.ExistsByNameAsync(command.Name))
-            throw new InvalidOperationException("El nombre de cliente ya existe.");
         if (!string.IsNullOrEmpty(command.Dni) && await customerRepository.ExistsByDniAsync(command.Dni))
             throw new InvalidOperationException("El DNI ya existe.");
         if (!string.IsNullOrEmpty(command.Ruc) && await customerRepository.ExistsByRucAsync(command.Ruc))
@@ -39,8 +37,6 @@ public class CustomerCommandService(ICustomerRepository customerRepository, IUni
             return null;
         }
         
-        if (await customerRepository.ExistsByNameAsync(command.Name, command.CustomerId))
-            throw new InvalidOperationException("El nombre de cliente ya existe.");
         if (!string.IsNullOrEmpty(command.Dni) && await customerRepository.ExistsByDniAsync(command.Dni, command.CustomerId))
             throw new InvalidOperationException("El DNI ya existe.");
         if (!string.IsNullOrEmpty(command.Ruc) && await customerRepository.ExistsByRucAsync(command.Ruc, command.CustomerId))
