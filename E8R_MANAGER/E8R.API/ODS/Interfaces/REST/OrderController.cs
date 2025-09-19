@@ -100,4 +100,27 @@ public class OrderController (
         var resources = orders.Select(OrderResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(resources);
     }
+    
+    [HttpGet("order-date/{orderDate}")]
+    public async Task<IActionResult> GetOrdersByOrderDate([FromRoute] DateOnly orderDate)
+    {
+        var query = new GetOrdersByOrderDateQuery(orderDate);
+        var orders = await orderQueryService.Handle(query);
+        var resources = orders.Select(OrderResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
+    }
+    
+    [HttpGet("order-state/{orderState}")]
+    public async Task<IActionResult> GetOrdersByOrderState([FromRoute] string orderState)
+    {
+        if (!Enum.TryParse(orderState, true, out Domain.Model.ValueObjects.OrderState parsedOrderState))
+        {
+            return BadRequest(new { message = $"Estado de orden inválido: {orderState}. Valores válidos: Proforma, Cancelado, Anulado." });
+        }
+
+        var query = new GetOrdersByOrderStateQuery(parsedOrderState);
+        var orders = await orderQueryService.Handle(query);
+        var resources = orders.Select(OrderResourceFromEntityAssembler.ToResourceFromEntity);
+        return Ok(resources);
+    }
 }

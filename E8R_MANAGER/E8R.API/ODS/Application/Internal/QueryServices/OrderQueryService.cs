@@ -20,4 +20,12 @@ public class OrderQueryService(IOrderRepository orderRepository) : IOrderQuerySe
     {
         return await orderRepository.FindByCustomerIdAsync(query.CustomerId);
     }
+    public async Task<IEnumerable<Order>> Handle(GetOrdersByOrderDateQuery query)
+    {
+        return await orderRepository.FindByOrderDateAsync(query.OrderDate);
+    }
+    public async Task<IEnumerable<Order>> Handle(GetOrdersByOrderStateQuery query)
+    {
+        return await orderRepository.FindByOrderStateAsync(query.OrderState);
+    }
 }
