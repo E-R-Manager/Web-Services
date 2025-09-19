@@ -35,7 +35,7 @@ public class Customer
         PhoneNumber = command.PhoneNumber;
         Email = command.Email;
         Address = command.Address;
-        CustomerType = CustomerType.Persona;
+        CustomerType = command.CustomerType;
     }
     
     public int Id { get; set; }

@@ -15,10 +15,11 @@ public class CustomerCommandService(ICustomerRepository customerRepository, IUni
         // Validaciones de unicidad
         if (await customerRepository.ExistsByNameAsync(command.Name))
             throw new InvalidOperationException("El nombre de cliente ya existe.");
-        if (await customerRepository.ExistsByDniAsync(command.Dni))
+        if (!string.IsNullOrEmpty(command.Dni) && await customerRepository.ExistsByDniAsync(command.Dni))
             throw new InvalidOperationException("El DNI ya existe.");
         if (!string.IsNullOrEmpty(command.Ruc) && await customerRepository.ExistsByRucAsync(command.Ruc))
             throw new InvalidOperationException("El RUC ya existe.");
+
 
         // Validación de CustomerType y RUC
         if (command.CustomerType == CustomerType.Empresa && string.IsNullOrWhiteSpace(command.Ruc))
@@ -40,7 +41,7 @@ public class CustomerCommandService(ICustomerRepository customerRepository, IUni
         
         if (await customerRepository.ExistsByNameAsync(command.Name, command.CustomerId))
             throw new InvalidOperationException("El nombre de cliente ya existe.");
-        if (await customerRepository.ExistsByDniAsync(command.Dni, command.CustomerId))
+        if (!string.IsNullOrEmpty(command.Dni) && await customerRepository.ExistsByDniAsync(command.Dni, command.CustomerId))
             throw new InvalidOperationException("El DNI ya existe.");
         if (!string.IsNullOrEmpty(command.Ruc) && await customerRepository.ExistsByRucAsync(command.Ruc, command.CustomerId))
             throw new InvalidOperationException("El RUC ya existe.");
