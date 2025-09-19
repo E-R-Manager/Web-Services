@@ -59,26 +59,6 @@ public class CustomerController(ICustomerCommandService customerCommandService, 
             return BadRequest(new { message = "Ocurrió un error al actualizar el cliente. " + e.Message });
         }
     }
-    [HttpDelete("{customerId}")]
-    public async Task<IActionResult> DeleteCustomer([FromRoute] int customerId)
-    {
-        try
-        {
-            var customer = await customerQueryService.Handle(new GetCustomerByIdQuery(customerId));
-            if (customer == null) return NotFound();
-
-            var resource = new DeleteCustomerResource(customerId);
-            var command = DeleteCustomerCommandFromResourceAssembler.ToCommandFromResource(resource);
-            var result = await customerCommandService.Handle(command);
-            if (!result) return BadRequest(new { message = "No se pudo eliminar el cliente." });
-
-            return Ok(new { message = $"El cliente con id {customerId} se ha borrado correctamente." });
-        }
-        catch (Exception e)
-        {
-            return BadRequest(new { message = "Ocurrió un error al eliminar el cliente. " + e.Message });
-        }
-    }
 
     [HttpGet("client-name/{name}")]
     public async Task<IActionResult> GetCustomersByName([FromRoute] string name)

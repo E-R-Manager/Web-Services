@@ -58,16 +58,4 @@ public class CustomerCommandService(ICustomerRepository customerRepository, IUni
         await unitOfWork.CompleteAsync();
         return customer;
     }
-
-    public async Task<bool> Handle(DeleteCustomerCommand command)
-    {
-        var customer = await customerRepository.FindByIdAsync(command.CustomerId);
-        if (customer == null)
-        {
-            return false;
-        }
-        await customerRepository.RemoveAsync(customer);
-        await unitOfWork.CompleteAsync();
-        return true;
-    }
 }
