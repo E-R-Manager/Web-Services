@@ -32,4 +32,9 @@ public class CustomerQueryService(ICustomerRepository customerRepository) : ICus
         return await customerRepository.FindByRucAsync(query.Ruc);
     }
     
+    public async Task<(IEnumerable<Customer> Customers, int TotalCount)> Handle(GetAllCustomersPaginationQuery query)
+    {
+        return await customerRepository.GetAllCustomersPaginationQueryAsync(query.Page, query.PageSize);
+    }
+    
 }

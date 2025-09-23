@@ -69,4 +69,16 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
             .Where(c => c.Ruc.Contains(ruc))
             .ToListAsync();
     }
+    
+    public async Task<(IEnumerable<Customer> Customers, int TotalCount)> GetAllCustomersPaginationQueryAsync(int page, int pageSize)
+    {
+        var query = _context.Customers.AsQueryable();
+        var totalCount = await query.CountAsync();
+        var customers = await query
+            .OrderBy(c => c.Id)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return (customers, totalCount);
+    }
 }

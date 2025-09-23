@@ -19,6 +19,26 @@ public class CustomerController(ICustomerCommandService customerCommandService, 
         var resources = customers.Select(CustomerResourceFromEntityAssembler.ToResourceFromEntity);
         return Ok(resources);
     }
+    
+    [HttpGet("paginated")]
+    public async Task<IActionResult> GetAllCustomersPaginated([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+    {
+        if (page <= 0 || pageSize <= 0)
+            return BadRequest(new { message = "Los parámetros de paginación deben ser mayores a cero." });
+
+        var query = new GetAllCustomersPaginationQuery(page, pageSize);
+        var (customers, totalCount) = await customerQueryService.Handle(query);
+        var resources = customers.Select(CustomerResourceFromEntityAssembler.ToResourceFromEntity);
+
+        return Ok(new
+        {
+            TotalCount = totalCount,
+            Page = page,
+            PageSize = pageSize,
+            Customers = resources
+        });
+    }
+    
     [HttpGet("{customerId}")]
     public async Task<IActionResult> GetCustomerById([FromRoute] int customerId)
     {

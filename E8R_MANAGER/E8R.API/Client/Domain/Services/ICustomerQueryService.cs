@@ -10,4 +10,5 @@ public interface ICustomerQueryService
     Task<IEnumerable<Customer>> Handle(GetCustomersByNameQuery query);
     Task<IEnumerable<Customer>> Handle(GetCustomersByDniQuery query);
     Task<IEnumerable<Customer>> Handle(GetCustomersByRucQuery query);
+    Task<(IEnumerable<Customer> Customers, int TotalCount)> Handle(GetAllCustomersPaginationQuery query);
 }

@@ -15,4 +15,5 @@ public interface ICustomerRepository: IBaseRepository<Customer>
     Task <IEnumerable<Customer>> FindByNameAsync(string name);
     Task <IEnumerable<Customer>> FindByDniAsync(string dni);
     Task <IEnumerable<Customer>> FindByRucAsync(string ruc);
+    Task<(IEnumerable<Customer> Customers, int TotalCount)> GetAllCustomersPaginationQueryAsync(int page, int pageSize);
 }
